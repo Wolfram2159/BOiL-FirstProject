@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Zagadnienie pośrednika");
-        primaryStage.setScene(new Scene(root, 900, 800));
+        primaryStage.setScene(new Scene(root, 900, 700));
         primaryStage.show();
     }
 

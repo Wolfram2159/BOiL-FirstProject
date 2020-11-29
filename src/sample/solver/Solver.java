@@ -13,6 +13,15 @@ public class Solver {
     private int[][] zArray;
     private TableCell[][] table;
     private EquationList equationList;
+    private int profit = 0;
+
+    public TableCell[][] getTable() {
+        return table;
+    }
+
+    public int getProfit() {
+        return profit;
+    }
 
     public Solver(EntryData data) {
         this.data = data;
@@ -183,7 +192,6 @@ public class Solver {
     }
 
     private void showSolution() {
-        int profit = 0;
         for (int i = 0; i < table.length - 1; i++) {
             for (int j = 0; j < table[i].length - 1; j++) {
                 System.out.print(table[i][j].getZ() + " / " + table[i][j].getVal() + "      ");
