@@ -229,5 +229,6 @@
             </AnchorPane>
          </children>
       </GridPane>
+      <Label layoutX="46.0" layoutY="461.0" text="Tabela optymalnych tras" />
    </children>
 </AnchorPane>
