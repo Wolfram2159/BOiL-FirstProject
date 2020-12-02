@@ -25,11 +25,11 @@ public class Solver {
 
     public Solver(EntryData data) {
         this.data = data;
-        this.equationList = new EquationList(data.getDostawcy().length, data.getOdbiorcy().length);
+        this.equationList = new EquationList(data.getSuppliers().length, data.getRecipients().length);
     }
 
     public void solveProblem() {
-        zArray = policzJednostkowyZysk(data);
+        zArray = calculateIndividualProfit(data);
         createTable();
         printTable();
         createEquations();
@@ -51,18 +51,18 @@ public class Solver {
         }
     }
 
-    private int[][] policzJednostkowyZysk(EntryData entryData) {
-        int[][] jednostkoweZyski = new int[2][];
+    private int[][] calculateIndividualProfit(EntryData entryData) {
+        int[][] individualProfits = new int[2][];
 
-        for (int i = 0; i < entryData.getKosztyTransportu().length; i++) {
-            jednostkoweZyski[i] = new int[4];
-            for (int j = 0; j < entryData.getKosztyTransportu()[i].length; j++) {
-                jednostkoweZyski[i][j] = entryData.getCenySprzedazy()[j] - entryData.getKosztyTransportu()[i][j] - entryData.getCenyZakupu()[i];
-                System.out.println(i + "/" + j + " = " + jednostkoweZyski[i][j]);
+        for (int i = 0; i < entryData.getTransportCosts().length; i++) {
+            individualProfits[i] = new int[4];
+            for (int j = 0; j < entryData.getTransportCosts()[i].length; j++) {
+                individualProfits[i][j] = entryData.getSellPrices()[j] - entryData.getTransportCosts()[i][j] - entryData.getBuyPrices()[i];
+                System.out.println(i + "/" + j + " = " + individualProfits[i][j]);
             }
         }
 
-        return jednostkoweZyski;
+        return individualProfits;
     }
 
     private void createTable() {
@@ -104,31 +104,31 @@ public class Solver {
     }
 
     private void completeTable(Pair[] indexesSortedByValue) {
-        int[] dostawcy = Arrays.copyOf(data.getDostawcy(), data.getDostawcy().length + 1);
-        int dostawcySuma = 0;
-        for (int i : dostawcy) {
-            dostawcySuma += i;
+        int[] supplier = Arrays.copyOf(data.getSuppliers(), data.getSuppliers().length + 1);
+        int supplierSum = 0;
+        for (int i : supplier) {
+            supplierSum += i;
         }
-        int[] odbiorcy = Arrays.copyOf(data.getOdbiorcy(), data.getOdbiorcy().length + 1);
-        int odbiorcySuma = 0;
-        for (int i : odbiorcy) {
-            odbiorcySuma += i;
+        int[] recipient = Arrays.copyOf(data.getRecipients(), data.getRecipients().length + 1);
+        int recipientSum = 0;
+        for (int i : recipient) {
+            recipientSum += i;
         }
-        odbiorcy[odbiorcy.length - 1] = dostawcySuma;
-        dostawcy[dostawcy.length - 1] = odbiorcySuma;
+        recipient[recipient.length - 1] = supplierSum;
+        supplier[supplier.length - 1] = recipientSum;
         for (Pair pair : indexesSortedByValue) {
-            if (dostawcy[pair.getFirst()] > 0) {
+            if (supplier[pair.getFirst()] > 0) {
                 int availableSpace = getAvailableSpace(pair.getSecond());
-                if (availableSpace <= dostawcy[pair.getFirst()]) {
+                if (availableSpace <= supplier[pair.getFirst()]) {
                    table[pair.getFirst()][pair.getSecond()].setVal(availableSpace);
-                   dostawcy[pair.getFirst()] -= availableSpace;
+                   supplier[pair.getFirst()] -= availableSpace;
                 } else {
-                    table[pair.getFirst()][pair.getSecond()].setVal(dostawcy[pair.getFirst()]);
-                    dostawcy[pair.getFirst()] = 0;
+                    table[pair.getFirst()][pair.getSecond()].setVal(supplier[pair.getFirst()]);
+                    supplier[pair.getFirst()] = 0;
                 }
             }
         }
-        fillFictional(dostawcy);
+        fillFictional(supplier);
     }
 
     private int getAvailableSpace(int odbiorca) {
@@ -136,7 +136,7 @@ public class Solver {
         for (int i = 0; i < table.length; i++) {
             sum += table[i][odbiorca].getVal();
         }
-        return Math.max(data.getOdbiorcy()[odbiorca] - sum, 0);
+        return Math.max(data.getRecipients()[odbiorca] - sum, 0);
     }
 
     private void fillFictional(int[] dostawcy) {
@@ -178,7 +178,7 @@ public class Solver {
 
     private void balanceTable(Pair[] pairCoords) {
         if (pairCoords == null) {
-            System.out.println("ni dziala :(");
+            System.out.println("Something wrong :/");
         } else {
             Pair firstCoords = pairCoords[0];
             Pair secondCoords = pairCoords[1];

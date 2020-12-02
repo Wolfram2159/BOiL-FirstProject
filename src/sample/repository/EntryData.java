@@ -1,57 +1,57 @@
 package sample.repository;
 
 public class EntryData {
-    private int[] dostawcy;
-    private int[] odbiorcy;
-    private int[][] kosztyTransportu;
-    private int[] cenySprzedazy;
-    private int[] cenyZakupu;
+    private int[] suppliers;
+    private int[] recipients;
+    private int[][] transportCosts;
+    private int[] sellPrices;
+    private int[] buyPrices;
 
-    public EntryData(int[] dostawcy, int[] odbiorcy, int[][] kosztyTransportu, int[] cenySprzedazy, int[] cenyZakupu) {
-        this.dostawcy = dostawcy;
-        this.odbiorcy = odbiorcy;
-        this.kosztyTransportu = kosztyTransportu;
-        this.cenySprzedazy = cenySprzedazy;
-        this.cenyZakupu = cenyZakupu;
+    public EntryData(int[] suppliers, int[] recipients, int[][] transportCosts, int[] sellPrices, int[] buyPrices) {
+        this.suppliers = suppliers;
+        this.recipients = recipients;
+        this.transportCosts = transportCosts;
+        this.sellPrices = sellPrices;
+        this.buyPrices = buyPrices;
     }
 
-    public int[] getDostawcy() {
-        return dostawcy;
+    public int[] getSuppliers() {
+        return suppliers;
     }
 
-    public void setDostawcy(int[] dostawcy) {
-        this.dostawcy = dostawcy;
+    public void setSuppliers(int[] suppliers) {
+        this.suppliers = suppliers;
     }
 
-    public int[] getOdbiorcy() {
-        return odbiorcy;
+    public int[] getRecipients() {
+        return recipients;
     }
 
-    public void setOdbiorcy(int[] odbiorcy) {
-        this.odbiorcy = odbiorcy;
+    public void setRecipients(int[] recipients) {
+        this.recipients = recipients;
     }
 
-    public int[][] getKosztyTransportu() {
-        return kosztyTransportu;
+    public int[][] getTransportCosts() {
+        return transportCosts;
     }
 
-    public void setKosztyTransportu(int[][] kosztyTransportu) {
-        this.kosztyTransportu = kosztyTransportu;
+    public void setTransportCosts(int[][] transportCosts) {
+        this.transportCosts = transportCosts;
     }
 
-    public int[] getCenySprzedazy() {
-        return cenySprzedazy;
+    public int[] getSellPrices() {
+        return sellPrices;
     }
 
-    public void setCenySprzedazy(int[] cenySprzedazy) {
-        this.cenySprzedazy = cenySprzedazy;
+    public void setSellPrices(int[] sellPrices) {
+        this.sellPrices = sellPrices;
     }
 
-    public int[] getCenyZakupu() {
-        return cenyZakupu;
+    public int[] getBuyPrices() {
+        return buyPrices;
     }
 
-    public void setCenyZakupu(int[] cenyZakupu) {
-        this.cenyZakupu = cenyZakupu;
+    public void setBuyPrices(int[] buyPrices) {
+        this.buyPrices = buyPrices;
     }
 }
