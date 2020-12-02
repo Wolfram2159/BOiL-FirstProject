@@ -20,12 +20,26 @@ public class Controller {
     public TextField k_transp00, k_transp01, k_transp02, k_transp03, k_transp10, k_transp11, k_transp12, k_transp13;
     public Label zysk, label00, label01, label02, label03, label10, label11, label12, label13;
 
+    public Label zysk04, zysk01, zysk02, zysk03, zysk10, zysk11, zysk12, zysk13;
+
     public void onButtonClick() {
         //Solver solver = new Solver(repository.getEntryData());
         Solver solver = new Solver(collectData());
         solver.solveProblem();
         showTable(solver.getTable());
         showProfit(solver.getProfit());
+        showUnitProfit(solver.getTable());
+    }
+
+    private void showUnitProfit(TableCell[][] table) {
+        zysk01.setText(Integer.toString(table[0][0].getZ()));
+        zysk02.setText(Integer.toString(table[0][1].getZ()));
+        zysk03.setText(Integer.toString(table[0][2].getZ()));
+        zysk04.setText(Integer.toString(table[0][3].getZ()));
+        zysk10.setText(Integer.toString(table[1][0].getZ()));
+        zysk11.setText(Integer.toString(table[1][1].getZ()));
+        zysk12.setText(Integer.toString(table[1][2].getZ()));
+        zysk13.setText(Integer.toString(table[1][3].getZ()));
     }
 
     private EntryData collectData() {
