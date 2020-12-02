@@ -35,7 +35,7 @@ public class Solver {
         createEquations();
         solveEquations();
         while(!equationList.isOptimalSolution()) {
-            balanceTable(equationList.createLoop());
+            if(!balanceTable(equationList.createLoop())) break;
             createEquations();
             solveEquations();
         }
@@ -176,9 +176,9 @@ public class Solver {
         equationList.solveCriterialEquations();
     }
 
-    private void balanceTable(Pair[] pairCoords) {
+    private boolean balanceTable(Pair[] pairCoords) {
         if (pairCoords == null) {
-            System.out.println("Something wrong :/");
+            return false;
         } else {
             Pair firstCoords = pairCoords[0];
             Pair secondCoords = pairCoords[1];
@@ -189,6 +189,7 @@ public class Solver {
             table[secondCoords.getFirst()][firstCoords.getSecond()].substractVal(min);
             printTable();
         }
+        return true;
     }
 
     private void showSolution() {
